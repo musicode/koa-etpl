@@ -1,0 +1,26 @@
+{
+  "name": "koa-etpl",
+  "version": "1.0.0",
+  "description": "etpl for koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musicode/koa-etpl.git"
+  },
+  "keywords": [
+    "etpl",
+    "koa"
+  ],
+  "author": "musicode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/musicode/koa-etpl/issues"
+  },
+  "homepage": "https://github.com/musicode/koa-etpl",
+  "dependencies": {
+    "etpl": "^3.0.1"
+  }
+}
