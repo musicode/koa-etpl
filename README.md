@@ -14,7 +14,7 @@ etpl(app, {
     extname: '.html',
 
     engine: {
-        strip: true
+        strip: true,
         namingConflict: 'error'
     },
 
