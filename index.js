@@ -3,15 +3,18 @@
  * @author musicode
  */
 
+var path = require('path');
+
+var fs = require('co-fs');
 var etpl = require('etpl');
 
 /**
- * 默认配置
+ * etpl 默认配置
  *
  * @inner
  * @type {Object}
  */
-var defaultConfig = {
+var defaultEngineConfig = {
 
     // 清除命令标签前后的空白字符
     strip: true,
@@ -69,7 +72,7 @@ module.exports = function (app, options) {
 
     // 引擎配置
     var engineConfig = { };
-    extend(engineConfig, defaultConfig);
+    extend(engineConfig, defaultEngineConfig);
 
     var engine = options.engine;
     if (engine) {
@@ -101,26 +104,31 @@ module.exports = function (app, options) {
     // 编译缓存
     var compileCache = { };
 
-    function *renderEtpl(viewPath, data) {
+    function* renderEtpl(viewPath, data) {
 
         viewPath = path.join(root, viewPath) + extname;
 
         var render;
 
         if (!cache || !compileCache[viewPath]) {
+
             var tpl = yield fs.readFile(viewPath, 'utf8');
             render = etpl.compile(tpl);
-        }
 
-        if (cache && !compileCache[viewPath]) {
-            compileCache[viewPath] = render;
+            if (cache && !compileCache[viewPath]) {
+                compileCache[viewPath] = render;
+            }
+
+        }
+        else {
+            render = compileCache[viewPath];
         }
 
         return render(data);
 
     }
 
-    app.context.render = function (viewPath, viewData) {
+    app.context.render = function* (viewPath, viewData) {
 
         var renderData = { };
 
@@ -132,7 +140,7 @@ module.exports = function (app, options) {
             extend(renderData, viewData);
         }
 
-        var html = yield *renderEtpl(viewPath, renderData);
+        var html = yield renderEtpl(viewPath, renderData);
 
         return html;
 

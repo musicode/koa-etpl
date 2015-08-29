@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/musicode/koa-etpl",
   "dependencies": {
+    "co-fs": "^1.2.0",
     "etpl": "^3.0.1"
   }
 }
