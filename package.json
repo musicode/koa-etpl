@@ -1,6 +1,6 @@
 {
   "name": "koa-etpl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "etpl for koa",
   "main": "index.js",
   "scripts": {

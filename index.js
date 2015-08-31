@@ -19,7 +19,7 @@ var defaultEngineConfig = {
     // 清除命令标签前后的空白字符
     strip: true,
 
-    // target或master名字冲突时的处理策略
+    // target 或 master 名字冲突时的处理策略
     // 冲突必须报错，否则出了问题太难搞
     namingConflict: 'error'
 
@@ -113,7 +113,7 @@ module.exports = function (app, options) {
         if (!cache || !compileCache[viewPath]) {
 
             var tpl = yield fs.readFile(viewPath, 'utf8');
-            render = etpl.compile(tpl);
+            render = engineInstance.compile(tpl);
 
             if (cache && !compileCache[viewPath]) {
                 compileCache[viewPath] = render;
